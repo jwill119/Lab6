@@ -4,6 +4,7 @@
 // Construct sorted sequences and call functions that
 //   process the sorted sequences.
 
+// Modified by Jacob Williams, 11/5/2018, for COSC 2030 lab 6
 
 #include "RandomUtilities.h"
 #include "ContainerPrinting.h"
