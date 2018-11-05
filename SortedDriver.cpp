@@ -78,6 +78,8 @@ double mostIsolated(vector<double> & number) {
 
     for (int i = 1; i < number.size() - 1; i++) {
 
+        // Chayce, Sydney, and Jagadish helped me realize that I need to compare both
+        // left and right isolations.
         first = number[i-1];
         second = number[i];
         third = number[i+1];
@@ -112,7 +114,26 @@ double mostIsolated(vector<double> & number) {
 // post: The number of strings in A that do not occur in B
 //         has been returned.
 int unmatched(list<string> & A, list<string> & B) {
+    int count = 0;
+    bool done = false;
+    std::list<string>::iterator itA = A.begin();
+    std::list<string>::iterator itB = B.begin();
 
+    // Jagadish helped me with the algorithm here!
+    while (!done) {
+        if (*itA < *itB) {
+            itA++;
+        } else if (*itA > *itB) {
+            itB++;
+        } else {
+            count++;
+            itA++;
+        }
+
+        if (itA == A.end()) done = true;
+    }
+
+    return A.size() - count;
 }
 
 
