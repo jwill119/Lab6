@@ -8,7 +8,7 @@
 
 #include "RandomUtilities.h"
 #include "ContainerPrinting.h"
-#include "winTimer.h"//CHANGE: this to unixTimer.h if on mac/linux
+#include "unixTimer.h"              //CHANGE: this to unixTimer.h if on mac/linux
 #include <list>
 #include <iostream>
 #include <vector>
@@ -59,22 +59,60 @@ getWords(size_t numWords, size_t wordLength, string alphabet)
 // pre:  number is not empty;
 //       number is sorted from smallest to largest
 // post: The most isolated entry in number has been returned
-double
-mostIsolated(vector<double> & number)
-{
-	// STUB  STUB  STUB
-	return -123.456;
+double mostIsolated(vector<double> & number) {
+    if (number.empty()) {
+        return 0;
+    }
+
+    double first = number[0];
+    double second = 0;
+    double third = 0;
+    double leftIsolation = 0;
+    double rightIsolation = 0;
+    double isolation = 0;               // the nearest-neighbor formulation
+    int isolatedIndex = 0;
+
+    if (number.size() == 1) {
+        return first;
+    }
+
+    for (int i = 1; i < number.size() - 1; i++) {
+
+        first = number[i-1];
+        second = number[i];
+        third = number[i+1];
+
+        double newLeftIsolation = second - first;
+        double newRightIsolation = third - second;
+        double newIsolation = 0;
+
+        // There is a corner case for the first number.
+        if (i == 1) {
+            newIsolation = newLeftIsolation;
+        } else {
+            newIsolation = min(newLeftIsolation, newRightIsolation);
+        }
+
+        // Update the index of the most-isolated number and the maximum isolation
+        if (newIsolation > isolation && newLeftIsolation == newIsolation) {
+            isolatedIndex = i - 1;
+            isolation = newIsolation;
+        } else if (newIsolation > isolation && newRightIsolation == newIsolation) {
+            isolatedIndex = i;
+            isolation = newIsolation;
+        }
+
+    }
+
+    return number.at(isolatedIndex);
 }
 
 
 // pre:  A and B are sorted.
 // post: The number of strings in A that do not occur in B
 //         has been returned.
-int
-unmatched(list<string> & A, list<string> & B)
-{
-	// STUB  STUB  STUB
-	return -1;
+int unmatched(list<string> & A, list<string> & B) {
+
 }
 
 
