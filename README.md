@@ -24,3 +24,11 @@ Assume vector.size() >= 2
 - As a note, we will *never* have the last element be most isolated!
 
 ### The set difference
+Given two sorted lists of words (vector<string>) from a given alphabet, we wish to count the number of words in the first list that do *not* occur in the second word.
+  
+  It should run in linear time in the sum of the lengths of the strings.
+
+ALGORITHM HELP PROVIDED BY: 
+- Jagadish
+- Chayce
+- Sydney
